@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:ColorPallete"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="250">
+    <Window.DataContext>
+        <local:MainView/>
+    </Window.DataContext>
 
     <Grid Margin="8">
         <Grid.RowDefinitions>
@@ -17,7 +20,7 @@
                 <Canvas.Background>
                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="#FF0072FF" Offset="1"/>
+                        <GradientStop Color="{Binding myPallete.BaseHueColor}" Offset="1"/>
                     </LinearGradientBrush>
                 </Canvas.Background>
             </Canvas>
@@ -31,10 +34,29 @@
             </Canvas>
         </Grid>
         <StackPanel Grid.Row="1" Margin="0,10,0,0">
-            <Slider x:Name="SliderH" Margin="0,0,0,6"/>
-            <Slider Margin="0,0,0,6"/>
-            <Slider/>
+            <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="360" LargeChange="90"/>
+            <Slider x:Name="SliderS" Value="{Binding Saturation, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
+            <Slider x:Name="SliderB" Value="{Binding Brightness, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Label Content="Hue" FontSize="10"/>
+                    <Label Content="{Binding Hue}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1">
+                    <Label Content="Saturation" FontSize="10"/>
+                    <Label Content="{Binding Saturation}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="2">
+                    <Label Content="Brightness" FontSize="10"/>
+                    <Label Content="{Binding Brightness}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
 
+            </Grid>
         </StackPanel>
     </Grid>
 

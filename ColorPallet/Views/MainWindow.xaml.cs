@@ -23,7 +23,7 @@ namespace ColorPallete
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new TestViewModel();
+            this.DataContext = new MainView();            
         }
     }
 }

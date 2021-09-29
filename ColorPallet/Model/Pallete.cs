@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace ColorPallete
@@ -12,7 +13,12 @@ namespace ColorPallete
         /// </summary>
         public Pallete()
         {
+            ActiveColor = Color.FromRgb(R, G, B);
+            BaseHueColor = Color.FromRgb(R, G, B);
 
+            Task.Run( async () => { while (true) { await Task.Delay(100); 
+                    Console.WriteLine($"BaseHueColor: {BaseHueColor.R} {BaseHueColor.G} {BaseHueColor.B}");
+                } } );
         }
         public Pallete(RGB input)
         {
@@ -20,6 +26,7 @@ namespace ColorPallete
             this.G = input.G;
             this.B = input.B;
             ActiveColor = Color.FromRgb(R, G, B);
+            BaseHueColor = Color.FromRgb(R, G, B);
         }
         public Pallete(HSL input)
         {
@@ -32,11 +39,20 @@ namespace ColorPallete
 
         #region Public Methods
 
+        public void UpdateBaseHueColor()
+        {
+            BaseHueColor = HSLToRGB(new HSL(this.H, 1.0f, 1.0f)).ConvertToColor();
+        }
+
         /// <summary>
         /// Converts RGB to HSL
         /// </summary>
         /// <param name="rgb"></param>
         /// <returns>HSL</returns>
+        public static HSL RGBtoHSL(byte R, byte G, byte B)
+        {
+            return RGBToHSL(new RGB(R,G,B));
+        }
         public static HSL RGBToHSL(RGB rgb)
         {
             HSL hsl = new HSL();
@@ -121,6 +137,14 @@ namespace ColorPallete
 
         #region Helpers
 
+        private static Color GetBaseHueColor(float mHue)
+        {
+            return Color.FromRgb(
+                (byte)(255 * HueToRGB(2.0f, 1.0f, mHue + (1.0f / 3))),
+                (byte)(255 * HueToRGB(2.0f, 1.0f, mHue)),
+                (byte)(255 * HueToRGB(2.0f, 1.0f, mHue - (1.0f / 3))));
+        }
+
         private static float HueToRGB(float v1, float v2, float vH)
         {
             if (vH < 0)
@@ -144,23 +168,38 @@ namespace ColorPallete
         #endregion
 
         #region Public Properties
-        public Color ActiveColor { get; set; } = new Color();
+        public Color ActiveColor { get; set; }
+        public Color BaseHueColor { get; set; }
         public byte R { get; set; } = 0;
         public byte G { get; set; } = 0;
-        public byte B { get; set; } = 0;
+        public byte B { get; set; } = 255;
         public int H { get; set; } = 0;
-        public float S { get; set; } = 0;
-        public float L { get; set; } = 0;
+        public float S { get; set; } = 100;
+        public float L { get; set; } = 100;
         #endregion
     }
 
     public class RGB
     {
+        public RGB()
+        {
+            this.R = 0;
+            this.G = 0;
+            this.B = 0;
+        }
         public RGB(byte r, byte g, byte b)
         {
             this.R = r;
             this.G = g;
             this.B = b;
+        }
+        public HSL ConvertToHSL()
+        {
+            return Pallete.RGBtoHSL(R,G,B);
+        }
+        public System.Windows.Media.Color ConvertToColor()
+        {
+            return Color.FromRgb(R,G,B);
         }
         public byte R { get; set; }
         public byte G { get; set; }

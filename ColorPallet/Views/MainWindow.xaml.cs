@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.VisualStudio.Modeling.Diagrams;
+
 
 namespace ColorPallete
 {
@@ -28,19 +30,21 @@ namespace ColorPallete
 
         private void btnToHSL_Click(object sender, RoutedEventArgs e)
         {
-            HSL result = ((MainView)this.DataContext).ConvertRGBtoHSL(new RGB((byte)Int32.Parse(txtR.Text), (byte)Int32.Parse(txtG.Text), (byte)Int32.Parse(txtB.Text)));
-            txtH.Text = result.H.ToString();
-            txtS.Text = result.S.ToString();
-            txtL.Text = result.L.ToString();
+            System.Drawing.Color rgbColor = System.Drawing.Color.FromArgb(Int32.Parse(txtR.Text), Int32.Parse(txtG.Text), Int32.Parse(txtB.Text));
+            HslColor hslColor = HslColor.FromRgbColor(rgbColor);
+            txtH.Text = hslColor.Hue.ToString();
+            txtS.Text = hslColor.Saturation.ToString();
+            txtL.Text = hslColor.Luminosity.ToString();
 
         }
 
         private void btnToRGB_Click(object sender, RoutedEventArgs e)
         {
-            RGB result = ((MainView)this.DataContext).ConvertHSLtoRGB(new HSL(Int32.Parse(txtR.Text), (float)Int32.Parse(txtG.Text), (float)Int32.Parse(txtB.Text)));
-            txtR.Text = result.R.ToString();
-            txtG.Text = result.G.ToString();
-            txtB.Text = result.B.ToString();
+            HslColor hslColor = new HslColor(Int32.Parse(txtH.Text), Int32.Parse(txtS.Text), Int32.Parse(txtL.Text));
+            System.Drawing.Color rgbColor = hslColor.ToRgbColor();
+            txtR.Text = rgbColor.R.ToString();
+            txtG.Text = rgbColor.G.ToString();
+            txtB.Text = rgbColor.B.ToString();
         }
     }
 }

@@ -39,7 +39,7 @@
                 
             </Grid>
             <StackPanel Grid.Row="1" Margin="0,10,0,0">
-                <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="360" LargeChange="90"/>
+                <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="360"/>
                 <Slider x:Name="SliderS" Value="{Binding Saturation, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
                 <Slider x:Name="SliderB" Value="{Binding Brightness, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
                 <Grid>

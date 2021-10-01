@@ -8,14 +8,25 @@ namespace ColorPallete
 
         #region Public Properties
 
-        public Pallete myPallete { get; set; }
+        public Pallete myPallete = new Pallete();
 
-        public int Hue { get; set; } = 0;
-        public float Saturation { get; set; } = 100;
-        public float Brightness { get; set; } = 100;
-        public byte StatsR { get; set; } = 255;
-        public byte StatsG { get; set; } = 255;
-        public byte StatsB { get; set; } = 255;
+        public int Hue {
+            get { return myPallete.ColorHSL.Hue; }
+            set { myPallete.ColorHSL.Hue = value; } 
+        }
+        public int Saturation
+        {
+            get { return myPallete.ColorHSL.Saturation; }
+            set { myPallete.ColorHSL.Saturation = value; }
+        }
+        public int Brightness
+        {
+            get { return myPallete.ColorHSL.Luminosity ; }
+            set { myPallete.ColorHSL.Luminosity = value; }
+        }
+        public byte StatsR => myPallete.ColorHSL.ToRgbColor().R;
+        public byte StatsG => myPallete.ColorHSL.ToRgbColor().G;
+        public byte StatsB => myPallete.ColorHSL.ToRgbColor().B;
 
         #endregion
 
@@ -24,30 +35,28 @@ namespace ColorPallete
 
         public MainView()
         {
-            myPallete = new Pallete();
-
             // keeping this so I don't forget how to setup commands
             this.DoSomethingCommand = new RelayCommand(DoSomething);
 
-            PropertyChanged += (sender, e) => {
+            //PropertyChanged += (sender, e) => {
 
-                switch (e.PropertyName)
-                {
-                    case "Hue":
-                        myPallete.ColorHSL.H = Hue;
-                        break;
-                    case "Saturation":
-                        myPallete.ColorHSL.S = Saturation;
-                        break;
-                    case "Brightness":
-                        myPallete.ColorHSL.L = Brightness;
-                        break;
-                    default:
-                        break;
-                }
+            //    switch (e.PropertyName)
+            //    {
+            //        case "Hue":
+            //            myPallete.ColorHSL.Hue = Hue;
+            //            break;
+            //        case "Saturation":
+            //            myPallete.ColorHSL.Saturation = Saturation;
+            //            break;
+            //        case "Brightness":
+            //            myPallete.ColorHSL.Luminosity = Brightness;
+            //            break;
+            //        default:
+            //            break;
+            //    }
 
-                UpdateStatusBar();
-            };
+            //    UpdateStatusBar();
+            //};
         }
 
         #endregion
@@ -64,9 +73,7 @@ namespace ColorPallete
 
         private void UpdateStatusBar()
         {
-            StatsR = myPallete.ColorRGB.R;
-            StatsG = myPallete.ColorRGB.G;
-            StatsB = myPallete.ColorRGB.B;
+
         }
         private void DoSomething()
         {
@@ -78,8 +85,7 @@ namespace ColorPallete
 
         #region Public Methods
 
-        public HSL ConvertRGBtoHSL(RGB inputRgb) => Pallete.RGBToHSL(inputRgb);
-        public RGB ConvertHSLtoRGB(HSL inputHsl) => Pallete.HSLToRGB(inputHsl);
+
 
         #endregion
 

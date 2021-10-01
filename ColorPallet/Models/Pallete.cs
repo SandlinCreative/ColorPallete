@@ -7,51 +7,77 @@ namespace ColorPallete
 {
     class Pallete
     {
+
+        #region Private Members
+
+        private Color _activeColor;
+        private Color _baseHue;
+
+        private RGB _rgb;
+        private HSL _hsl;
+
+        #endregion
+
+
+        #region Public Properties
+        public Color ActiveColor {
+            get { return this._activeColor; }
+            set { this._activeColor = value; }
+        }
+        public Color BaseHue {
+            get { return this._baseHue; }
+            set { this._baseHue = value; }
+        }
+        public RGB ColorRGB {
+            get { return this._rgb; }
+            set { this._rgb = value; }
+        }
+        public HSL ColorHSL {
+            get { return this._hsl; }
+            set { this._hsl = value; }
+        }
+        #endregion
+
+
         #region Constructor
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
+
         public Pallete()
         {
-            ActiveColor = Color.FromRgb(R, G, B);
-            BaseHueColor = Color.FromRgb(R, G, B);
+            _activeColor = new Color();
+            _baseHue = new Color();
 
-            Task.Run( async () => { while (true) { await Task.Delay(100); 
-                    Console.WriteLine($"BaseHueColor: {BaseHueColor.R} {BaseHueColor.G} {BaseHueColor.B}");
-                } } );
+            //Task.Run( async () => { while (true) { await Task.Delay(100); 
+            //        Console.WriteLine($"BaseHueColor: {BaseHueColor.R} {BaseHueColor.G} {BaseHueColor.B}");
+            //    } } );
         }
         public Pallete(RGB input)
         {
-            this.R = input.R;
-            this.G = input.G;
-            this.B = input.B;
-            ActiveColor = Color.FromRgb(R, G, B);
-            BaseHueColor = Color.FromRgb(R, G, B);
+            _rgb.R = input.R;
+            _rgb.G = input.G;
+            _rgb.B = input.B;
+            ActiveColor = Color.FromRgb(_rgb.R, _rgb.G, _rgb.B);
+            BaseHue = Color.FromRgb(_rgb.R, _rgb.G, _rgb.B);
         }
         public Pallete(HSL input)
         {
-            this.H = input.H;
-            this.S = input.S;
-            this.L = input.L;
+            this._hsl.H = input.H;
+            this._hsl.S = input.S;
+            this._hsl.L = input.L;
 
         }
+
         #endregion
+
 
         #region Public Methods
 
         public void UpdateBaseHueColor()
         {
-            BaseHueColor = HSLToRGB(new HSL(this.H, 1.0f, 1.0f)).ConvertToColor();
+            // not implemented
         }
-
-        /// <summary>
-        /// Converts RGB to HSL
-        /// </summary>
-        /// <param name="rgb"></param>
-        /// <returns>HSL</returns>
-        public static HSL RGBtoHSL(byte R, byte G, byte B)
+        public static HSL RGBtoHSL(byte r, byte g, byte b)
         {
-            return RGBToHSL(new RGB(R,G,B));
+            return RGBToHSL(new RGB(r,g,b));
         }
         public static HSL RGBToHSL(RGB rgb)
         {
@@ -101,12 +127,10 @@ namespace ColorPallete
 
             return hsl;
         }
-
-        /// <summary>
-        /// Converts HSL to RGB
-        /// </summary>
-        /// <param name="hsl"></param>
-        /// <returns>RGB</returns>
+        public static RGB HSLToRGB(int h, float s, float l)
+        {
+            return HSLToRGB(new HSL(h,s,l));
+        }
         public static RGB HSLToRGB(HSL hsl)
         {
             byte r = 0;
@@ -135,16 +159,16 @@ namespace ColorPallete
 
         #endregion
 
+
         #region Helpers
 
-        private static Color GetBaseHueColor(float mHue)
+        private static Color GetBaseHue(float mHue)
         {
             return Color.FromRgb(
                 (byte)(255 * HueToRGB(2.0f, 1.0f, mHue + (1.0f / 3))),
                 (byte)(255 * HueToRGB(2.0f, 1.0f, mHue)),
                 (byte)(255 * HueToRGB(2.0f, 1.0f, mHue - (1.0f / 3))));
         }
-
         private static float HueToRGB(float v1, float v2, float vH)
         {
             if (vH < 0)
@@ -167,70 +191,9 @@ namespace ColorPallete
 
         #endregion
 
-        #region Public Properties
-        public Color ActiveColor { get; set; }
-        public Color BaseHueColor { get; set; }
-        public byte R { get; set; } = 0;
-        public byte G { get; set; } = 0;
-        public byte B { get; set; } = 255;
-        public int H { get; set; } = 0;
-        public float S { get; set; } = 100;
-        public float L { get; set; } = 100;
-        #endregion
     }
 
-    public class RGB
-    {
-        public RGB()
-        {
-            this.R = 0;
-            this.G = 0;
-            this.B = 0;
-        }
-        public RGB(byte r, byte g, byte b)
-        {
-            this.R = r;
-            this.G = g;
-            this.B = b;
-        }
-        public HSL ConvertToHSL()
-        {
-            return Pallete.RGBtoHSL(R,G,B);
-        }
-        public System.Windows.Media.Color ConvertToColor()
-        {
-            return Color.FromRgb(R,G,B);
-        }
-        public byte R { get; set; }
-        public byte G { get; set; }
-        public byte B { get; set; }
-        public bool Equals(RGB rgb)
-        {
-            return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
-        }
-    }
 
-    public class HSL
-    {
-        public HSL()
-        {
-            this.H = 0;
-            this.S = 0;
-            this.L = 0;
-        }
-        public HSL(int h, float s, float l)
-        {
-            this.H = h;
-            this.S = s;
-            this.L = l;
-        }
 
-        public int H { get; set; }
-        public float S { get; set; }
-        public float L { get; set; }
-        public bool Equals(HSL hsl)
-        {
-            return (this.H == hsl.H) && (this.S == hsl.S) && (this.L == hsl.L);
-        }
-    }
+
 }

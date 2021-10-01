@@ -23,7 +23,24 @@ namespace ColorPallete
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainView();            
+            this.DataContext = new MainView();
+        }
+
+        private void btnToHSL_Click(object sender, RoutedEventArgs e)
+        {
+            HSL result = ((MainView)this.DataContext).ConvertRGBtoHSL(new RGB((byte)Int32.Parse(txtR.Text), (byte)Int32.Parse(txtG.Text), (byte)Int32.Parse(txtB.Text)));
+            txtH.Text = result.H.ToString();
+            txtS.Text = result.S.ToString();
+            txtL.Text = result.L.ToString();
+
+        }
+
+        private void btnToRGB_Click(object sender, RoutedEventArgs e)
+        {
+            RGB result = ((MainView)this.DataContext).ConvertHSLtoRGB(new HSL(Int32.Parse(txtR.Text), (float)Int32.Parse(txtG.Text), (float)Int32.Parse(txtB.Text)));
+            txtR.Text = result.R.ToString();
+            txtG.Text = result.G.ToString();
+            txtB.Text = result.B.ToString();
         }
     }
 }

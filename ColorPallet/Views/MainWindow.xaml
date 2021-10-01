@@ -5,59 +5,125 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorPallete"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="250">
+        Title="MainWindow" Height="545.334" Width="250">
     <Window.DataContext>
         <local:MainView/>
     </Window.DataContext>
-
-    <Grid Margin="8">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Grid>
-            <Canvas>
-                <Canvas.Background>
-                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                        <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="{Binding myPallete.BaseHueColor}" Offset="1"/>
-                    </LinearGradientBrush>
-                </Canvas.Background>
-            </Canvas>
-            <Canvas>
-                <Canvas.Background>
-                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                        <GradientStop Color="#00000000" Offset="0"/>
-                        <GradientStop Color="Black" Offset="1"/>
-                    </LinearGradientBrush>
-                </Canvas.Background>
-            </Canvas>
-        </Grid>
-        <StackPanel Grid.Row="1" Margin="0,10,0,0">
-            <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="360" LargeChange="90"/>
-            <Slider x:Name="SliderS" Value="{Binding Saturation, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
-            <Slider x:Name="SliderB" Value="{Binding Brightness, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
-            <Grid Height="50">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Label Content="Hue" FontSize="10"/>
-                    <Label Content="{Binding Hue}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1">
-                    <Label Content="Saturation" FontSize="10"/>
-                    <Label Content="{Binding Saturation}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="2">
-                    <Label Content="Brightness" FontSize="10"/>
-                    <Label Content="{Binding Brightness}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
-                </StackPanel>
-
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="200"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Canvas>
+                    <Canvas.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="{Binding myPallete.BaseHue}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Canvas.Background>
+                </Canvas>
+                <Canvas>
+                    <Canvas.Background>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="#00000000" Offset="0"/>
+                            <GradientStop Color="Black" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Canvas.Background>
+                </Canvas>
+                
             </Grid>
-        </StackPanel>
+            <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="360" LargeChange="90"/>
+                <Slider x:Name="SliderS" Value="{Binding Saturation, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
+                <Slider x:Name="SliderB" Value="{Binding Brightness, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Label Content="Hue" FontSize="10"/>
+                        <Label Content="{Binding Hue}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1">
+                        <Label Content="Saturation" FontSize="10"/>
+                        <Label Content="{Binding Saturation}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="2">
+                        <Label Content="Brightness" FontSize="10"/>
+                        <Label Content="{Binding Brightness}" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel>
+                        <Label Content="HSL" Padding="5,5,5,0" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txtH" Margin="0,0,4,0" />
+                            <TextBox x:Name="txtS" Margin="0,0,4,0" Grid.Column="1" />
+                            <TextBox x:Name="txtL" Margin="0,0,4,0" Grid.Column="2" />
+                        </Grid>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="2">
+                        <Label Content="RGB" Padding="5,5,5,0" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txtR" Margin="0,0,4,0" />
+                            <TextBox x:Name="txtG" Margin="0,0,4,0" Grid.Column="1" />
+                            <TextBox x:Name="txtB" Margin="0,0,4,0" Grid.Column="2" />
+                        </Grid>
+                    </StackPanel>
+
+                    <Button x:Name="btnToRGB" Content="Convert to RGB" Margin="0,8,0,0" Grid.Row="1" Click="btnToRGB_Click"/>
+                    <Button x:Name="btnToHSL" Content="Convert to HSL" Grid.Column="2" Margin="0,8,0,0" Grid.Row="1" Click="btnToHSL_Click"/>
+
+                </Grid>
+            </StackPanel>
+            
+        </Grid>
+        <StatusBar Grid.ColumnSpan="2" Margin="0,0,0,-0.333" Grid.RowSpan="2" VerticalAlignment="Top" Grid.Row="1" FontSize="11" Padding="8,0">
+            <StatusBarItem>
+                <TextBlock x:Name="lblR" Text="{Binding StatsR, Mode=OneWay}" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock x:Name="lblG" Text="{Binding StatsG, Mode=OneWay}" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock x:Name="lblB" Text="{Binding StatsB, Mode=OneWay}" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
+    
 
 </Window>

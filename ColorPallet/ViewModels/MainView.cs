@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ColorPallete
@@ -8,22 +9,35 @@ namespace ColorPallete
 
         #region Public Properties
 
-        public Pallete myPallete = new Pallete();
-
+        public Pallete myPallete { get; set; }
         public int Hue {
-            get { return myPallete.ColorHSL.Hue; }
-            set { myPallete.ColorHSL.Hue = value; } 
+            get { return myPallete.Hue; }
+            set { myPallete.Hue = value; }
         }
         public int Saturation
         {
-            get { return myPallete.ColorHSL.Saturation; }
-            set { myPallete.ColorHSL.Saturation = value; }
+            get { return myPallete.Saturation; }
+            set { myPallete.Saturation = value; }
         }
-        public int Brightness
+        public int Luminosity
         {
-            get { return myPallete.ColorHSL.Luminosity ; }
-            set { myPallete.ColorHSL.Luminosity = value; }
+            get { return myPallete.Luminosity ; }
+            set { myPallete.Luminosity = value; }
         }
+        public int R { get { return myPallete.ColorRGB.R; } }
+        public int G { get { return myPallete.ColorRGB.G; } }
+        public int B { get { return myPallete.ColorRGB.B; } }
+        public string RgbHex
+        {
+            get { return myPallete.RgbHex; }
+            set { myPallete.RgbHex = value; }
+        }
+        public System.Drawing.Color BaseHue
+        {
+            get { return myPallete.BaseHueColor; }
+            set { }
+        }
+
         public byte StatsR => myPallete.ColorHSL.ToRgbColor().R;
         public byte StatsG => myPallete.ColorHSL.ToRgbColor().G;
         public byte StatsB => myPallete.ColorHSL.ToRgbColor().B;
@@ -35,29 +49,20 @@ namespace ColorPallete
 
         public MainView()
         {
-            // keeping this so I don't forget how to setup commands
-            this.DoSomethingCommand = new RelayCommand(DoSomething);
-
-            //PropertyChanged += (sender, e) => {
-
-            //    switch (e.PropertyName)
-            //    {
-            //        case "Hue":
-            //            myPallete.ColorHSL.Hue = Hue;
-            //            break;
-            //        case "Saturation":
-            //            myPallete.ColorHSL.Saturation = Saturation;
-            //            break;
-            //        case "Brightness":
-            //            myPallete.ColorHSL.Luminosity = Brightness;
-            //            break;
-            //        default:
-            //            break;
-            //    }
-
-            //    UpdateStatusBar();
-            //};
+            myPallete = new Pallete();
+            //this.UpdateHueBrushCommand = new RelayCommand(UpdateHueBrush);
         }
+
+
+        #region Public Methods
+
+        public void SliderMouseUp()
+        {
+            this.RgbHex = myPallete.RgbHex;
+        }
+
+        #endregion
+
 
         #endregion
 
@@ -65,6 +70,7 @@ namespace ColorPallete
         #region Public Commands
 
         public ICommand DoSomethingCommand { get; set; }
+        //public RelayCommand UpdateHueBrushCommand { get; set; }
 
         #endregion
 
@@ -75,17 +81,6 @@ namespace ColorPallete
         {
 
         }
-        private void DoSomething()
-        {
-            
-        }
-
-        #endregion
-
-
-        #region Public Methods
-
-
 
         #endregion
 

@@ -46,5 +46,6 @@ namespace ColorPallete
             txtG.Text = rgbColor.G.ToString();
             txtB.Text = rgbColor.B.ToString();
         }
+
     }
 }

@@ -24,7 +24,9 @@
                     <Canvas.Background>
                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                             <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Color="{Binding myPallete.BaseHue}" Offset="1"/>
+                            <GradientStop Offset="1" Color="#FFE41313">
+                                
+                            </GradientStop>
                         </LinearGradientBrush>
                     </Canvas.Background>
                 </Canvas>
@@ -39,9 +41,9 @@
                 <local:CanvasSliderControl/>
             </Grid>
             <StackPanel Grid.Row="1" Margin="0,10,0,0">
-                <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="360"/>
-                <Slider x:Name="SliderS" Value="{Binding Saturation, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
-                <Slider x:Name="SliderB" Value="{Binding Brightness, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100"/>
+                <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="360" />
+                <Slider x:Name="SliderS" Value="{Binding Saturation, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100" />
+                <Slider x:Name="SliderB" Value="{Binding Luminosity, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100" />
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -109,18 +111,23 @@
                     <Button x:Name="btnToHSL" Content="Convert to HSL" Grid.Column="2" Margin="0,8,0,0" Grid.Row="1" Click="btnToHSL_Click"/>
 
                 </Grid>
+                <Rectangle x:Name="testRect" Fill="{Binding BaseHueBrush}" Height="100" Stroke="Black"/>
+
             </StackPanel>
             
         </Grid>
         <StatusBar Grid.ColumnSpan="2" Margin="0,0,0,-0.333" Grid.RowSpan="2" VerticalAlignment="Top" Grid.Row="1" FontSize="11" Padding="8,0">
             <StatusBarItem>
-                <TextBlock x:Name="lblR" Text="{Binding StatsR, Mode=OneWay}" />
+                <TextBlock x:Name="lblR" Text="{Binding Hue}" />
             </StatusBarItem>
             <StatusBarItem>
-                <TextBlock x:Name="lblG" Text="{Binding StatsG, Mode=OneWay}" />
+                <TextBlock x:Name="lblG" Text="{Binding Saturation}" />
             </StatusBarItem>
             <StatusBarItem>
-                <TextBlock x:Name="lblB" Text="{Binding StatsB, Mode=OneWay}" />
+                <TextBlock x:Name="lblB" Text="{Binding Luminosity}" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock x:Name="lblHex" Text="{Binding RgbHex}"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

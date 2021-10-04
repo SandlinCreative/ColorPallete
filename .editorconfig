@@ -14,3 +14,6 @@ dotnet_diagnostic.IDE0011.severity = none
 
 # IDE0008: Use explicit type
 dotnet_diagnostic.IDE0008.severity = none
+
+# IDE0027: Use expression body for accessors
+dotnet_diagnostic.IDE0027.severity = none

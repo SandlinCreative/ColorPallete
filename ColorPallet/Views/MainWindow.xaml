@@ -19,20 +19,11 @@
                 <RowDefinition MaxHeight="200"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid>
+            <Grid Background="{Binding BaseHueGradientBrush, Mode=OneWay}">
+                <Canvas/>
                 <Canvas>
                     <Canvas.Background>
-                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                            <GradientStop Color="White" Offset="0"/>
-                            <GradientStop Offset="1" Color="#FFE41313">
-                                
-                            </GradientStop>
-                        </LinearGradientBrush>
-                    </Canvas.Background>
-                </Canvas>
-                <Canvas>
-                    <Canvas.Background>
-                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                             <GradientStop Color="#00000000" Offset="0"/>
                             <GradientStop Color="Black" Offset="1"/>
                         </LinearGradientBrush>
@@ -41,9 +32,9 @@
                 <local:CanvasSliderControl/>
             </Grid>
             <StackPanel Grid.Row="1" Margin="0,10,0,0">
-                <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="360" />
-                <Slider x:Name="SliderS" Value="{Binding Saturation, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100" />
-                <Slider x:Name="SliderB" Value="{Binding Luminosity, Mode = TwoWay}" Margin="0,0,0,6" Maximum="100" />
+                <Slider x:Name="SliderH" Value="{Binding Hue, Mode = TwoWay}" Margin="0,0,0,6" Maximum="240" />
+                <Slider x:Name="SliderS" Value="{Binding Saturation, Mode = TwoWay}" Margin="0,0,0,6" Maximum="239" />
+                <Slider x:Name="SliderB" Value="{Binding Luminosity, Mode = TwoWay}" Margin="0,0,0,6" Maximum="239" />
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -87,9 +78,9 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="txtH" Margin="0,0,4,0" />
-                            <TextBox x:Name="txtS" Margin="0,0,4,0" Grid.Column="1" />
-                            <TextBox x:Name="txtL" Margin="0,0,4,0" Grid.Column="2" />
+                            <TextBox x:Name="txtH" Text="{Binding Hue}"  Margin="0,0,4,0" />
+                            <TextBox x:Name="txtS" Text="{Binding Saturation}"  Margin="0,0,4,0" Grid.Column="1" />
+                            <TextBox x:Name="txtL" Text="{Binding Luminosity}"  Margin="0,0,4,0" Grid.Column="2" />
                         </Grid>
                     </StackPanel>
                     
@@ -101,9 +92,9 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBox x:Name="txtR" Margin="0,0,4,0" />
-                            <TextBox x:Name="txtG" Margin="0,0,4,0" Grid.Column="1" />
-                            <TextBox x:Name="txtB" Margin="0,0,4,0" Grid.Column="2" />
+                            <TextBox x:Name="txtR" Text="{Binding R}" Margin="0,0,4,0" />
+                            <TextBox x:Name="txtG" Text="{Binding G}" Margin="0,0,4,0" Grid.Column="1" />
+                            <TextBox x:Name="txtB" Text="{Binding B}" Margin="0,0,4,0" Grid.Column="2" />
                         </Grid>
                     </StackPanel>
 
@@ -111,7 +102,8 @@
                     <Button x:Name="btnToHSL" Content="Convert to HSL" Grid.Column="2" Margin="0,8,0,0" Grid.Row="1" Click="btnToHSL_Click"/>
 
                 </Grid>
-                <Rectangle x:Name="testRect" Fill="{Binding BaseHueBrush}" Height="100" Stroke="Black"/>
+                <Rectangle x:Name="testRect" Fill="{Binding ColorBrush}" Stroke="Black" Margin="0,10,0,0" Height="50"/>
+                <Button x:Name="testbtn" Command="{Binding testbtn_ClickCommand}"/>
 
             </StackPanel>
             

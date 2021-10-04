@@ -13,35 +13,38 @@ namespace ColorPallete
         #region Private Members
 
         private HslColor _hsl;
-        public string _rgbHex;
+        private System.Drawing.Color _rgb;
+        private string _rgbHex;
+        private System.Windows.Media.Color _wmColor;
+        private System.Windows.Media.Color _baseHueWMColor;
 
         #endregion
 
 
         #region Public Properties
 
-        public HslColor ColorHSL { get; set; }
-        public int Hue { get { return _hsl.Hue; } set { _hsl.Hue = value; Update(); } }
-        public int Saturation { get { return _hsl.Saturation; } set { _hsl.Saturation = value; Update(); } }
-        public int Luminosity { get { return _hsl.Luminosity; } set { _hsl.Luminosity = value; Update(); } }
-
-        public System.Drawing.Color ColorRGB
+        public HslColor ColorHSL { get => _hsl; set { _hsl = value; Update(value); } }
+        public int Hue { get { return _hsl.Hue; } set { _hsl.Hue = value; Update(value); } }
+        public int Saturation { get { return _hsl.Saturation; } set { _hsl.Saturation = value; Update(value); } }
+        public int Luminosity { get { return _hsl.Luminosity; } set { _hsl.Luminosity = value; Update(value); } }
+        public System.Drawing.Color ColorRGB { get => _rgb; set { _rgb = value; Update(value); } }
+        public string RgbHex => _rgbHex;
+        public SolidColorBrush ColorBrush => new SolidColorBrush(_wmColor);
+        public System.Windows.Media.Color BaseHueWMColor => _baseHueWMColor;
+        public LinearGradientBrush BaseHueGradient
         {
-            get { return this._hsl.ToRgbColor(); }
-            set { 
-                this._hsl = HslColor.FromRgbColor(value);
-                Update();
+            get
+            {
+                LinearGradientBrush lgb = new LinearGradientBrush();
+                GradientStop stop2 = new GradientStop(Colors.White, 0);
+                GradientStop stop1 = new GradientStop(BaseHueWMColor, 1);
+                lgb.StartPoint = new System.Windows.Point(0,0);
+                lgb.EndPoint = new System.Windows.Point(1, 0.5);
+                lgb.MappingMode = BrushMappingMode.RelativeToBoundingBox;
+                lgb.GradientStops.Add(stop1);
+                lgb.GradientStops.Add(stop2);
+                return lgb;
             }
-        }
-        public string RgbHex
-        {
-            get { return _rgbHex; }
-            set { _rgbHex = value; }
-        }
-        public System.Drawing.Color BaseHueColor
-        {
-            get { return new HslColor(_hsl.Hue, 100, 50).ToRgbColor(); }
-            private set { }
         }
 
         #endregion
@@ -51,19 +54,15 @@ namespace ColorPallete
 
         public Pallete()
         {
-            _hsl = new HslColor(0,100,50);
-            ColorHSL = _hsl;
-            Update();
-        }
-        public Pallete(System.Drawing.Color input)
-        {
-            _hsl = HslColor.FromRgbColor(input);
-            Update();
+            ColorHSL = HslColor.FromRgbColor(System.Drawing.Color.FromArgb(255, 0, 0));
         }
         public Pallete(HslColor input)
         {
-            _hsl = input;
-            Update();
+            ColorHSL = input;
+        }
+        public Pallete(System.Drawing.Color input)
+        {
+            ColorRGB = input;
         }
 
         #endregion
@@ -71,11 +70,23 @@ namespace ColorPallete
 
         #region Public Methods
 
-        public void Update()
-        {
-            _rgbHex = $"#FF{ColorRGB.R.ToString("X2")}{ColorRGB.G.ToString("X2")}{ColorRGB.B.ToString("X2")}";
 
+        private void Update(object value)
+        {
+            if (value is System.Drawing.Color)
+            { // update from RGB color
+                _hsl = HslColor.FromRgbColor((System.Drawing.Color)value);
+            }
+            else if (value is HslColor || value is Int32)
+            {// update from existing HSL color
+                _rgb = _hsl.ToRgbColor();
+            }
+
+            UpdateHex();
+            UpdateWMColor();
+            UpdateBaseHue();
         }
+
 
 
         #endregion
@@ -83,6 +94,23 @@ namespace ColorPallete
 
         #region Helpers
 
+        private void UpdateHex() => _rgbHex = $"#FF{ColorRGB.R:X2}{ColorRGB.G:X2}{ColorRGB.B:X2}";
+        private void UpdateWMColor()
+        {
+            _wmColor.A = _rgb.A;
+            _wmColor.R = _rgb.R;
+            _wmColor.G = _rgb.G;
+            _wmColor.B = _rgb.B;
+        }
+        private void UpdateBaseHue()
+        {
+            HslColor h = new HslColor(_hsl.Hue, 240, 239/2);
+            System.Drawing.Color c = h.ToRgbColor();
+            _baseHueWMColor.A = c.A;
+            _baseHueWMColor.R = c.R;
+            _baseHueWMColor.G = c.G;
+            _baseHueWMColor.B = c.B;
+        }
 
         #endregion
 

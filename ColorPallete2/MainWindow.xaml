@@ -1,0 +1,34 @@
+﻿<Window x:Class="ColorPallete2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ColorPallete2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="560" Width="350">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Rectangle x:Name="ColorDisplay" Fill="{Binding ColorBrush}"/>
+        
+        <StackPanel Grid.Row="1" Margin="10">
+            <Label Content="HUE" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="10" Margin="0,0,0,8"/>
+            <Slider x:Name="HueSlider" VerticalAlignment="Center" Maximum="240" Value="{Binding Hue}" />
+        </StackPanel>
+
+        <StatusBar FontSize="10" VerticalAlignment="Bottom" Grid.Row="3" Margin="-8">
+            <StatusBarItem>
+                <Label Content="Hue: "/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Label Content="{Binding Hue}"></Label>
+            </StatusBarItem>
+        </StatusBar>
+
+    </Grid>
+</Window>

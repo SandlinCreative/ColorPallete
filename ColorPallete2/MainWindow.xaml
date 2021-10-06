@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <Grid Background="{Binding BaseHueGradientBrush}">
-            <local:CanvasSliderControl />
+            <local:CanvasSliderControl XValue="{Binding Saturation}" YValue="{Binding Luminosity}" MaxValue="-1"/>
         </Grid>
         <Rectangle x:Name="ColorDisplay" Fill="{Binding ColorBrush}" Grid.Row="1" Margin="0,8,0,0"/>
 

@@ -9,47 +9,40 @@ namespace ColorPallete2
     /// </summary>
     public partial class CanvasSliderControl : UserControl
     {
-        public static int PuckSize = 20;
-
         public CanvasSliderControl()
         {
             InitializeComponent();
         }
 
-        private void Ellipse_ManipulationDelta(object sender, ManipulationDeltaEventArgs args)
-        {
-            FrameworkElement Elem = sender as FrameworkElement;
-            double Left = Canvas.GetLeft(Elem);
-            double Top = Canvas.GetTop(Elem);
-            Left += args.DeltaManipulation.Translation.X;//Get x cordinate   
-            Top += args.DeltaManipulation.Translation.Y;//Get y cordinate   
+        public static int PuckSize = 20;
 
-            //check for bounds   
+        public double XValue {
+            get { return XValue; }
 
-            if (Left < 0)
+            set
             {
-                Left = 0;
-            }
-            else if (Left > (TheCanvas.ActualWidth - Elem.ActualWidth))
-            {
-                Left = TheCanvas.ActualWidth - Elem.ActualWidth;
-            }
+                XValue = value;
 
-            if (Top < 0)
-            {
-                Top = 0;
             }
-            else if (Top > (TheCanvas.ActualHeight - Elem.ActualHeight))
-            {
-                Top = TheCanvas.ActualHeight - Elem.ActualHeight;
-            }
-
-            Canvas.SetLeft(Elem, Left);
-            Canvas.SetTop(Elem, Top);
         }
+        public double YValue {
+            get { return YValue; }
+
+            set
+            {
+                YValue = value;
+            }
+        }
+        public int MaxValue { get; set; } = -1;
+
+        public static DependencyProperty XValueProp = DependencyProperty.Register("XValue", typeof(double), typeof(CanvasSliderControl));
+        public static DependencyProperty YValueProp = DependencyProperty.Register("YValue", typeof(double), typeof(CanvasSliderControl));
+        public static DependencyProperty MaxValueProp = DependencyProperty.Register("MaxValue", typeof(int), typeof(CanvasSliderControl));
+
 
         UIElement dragObject = null;
         Point offset;
+
 
         private void DragPuck_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -73,6 +66,7 @@ namespace ColorPallete2
         private void TheCanvas_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             //CheckBounds();
+            UpdateXY();
             this.dragObject = null;
             this.TheCanvas.ReleaseMouseCapture();
         }
@@ -107,6 +101,20 @@ namespace ColorPallete2
 
             Canvas.SetLeft(dragObject, Left);
             Canvas.SetTop(dragObject, Top);
+        }
+
+        private void UpdateXY()
+        {
+            if (MaxValue < 0)
+            {
+                XValue = offset.X;
+                YValue = offset.Y;
+            }
+            else
+            {
+                XValue = offset.X * MaxValue / TheCanvas.ActualWidth;
+                YValue = offset.Y * MaxValue / TheCanvas.ActualWidth;
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ColorPallete2
             {
                 _hslColor.Hue = value;
                 UpdateBaseHue();
-                PropertyChanged(this, new PropertyChangedEventArgs("BaseHueGradient"));
+                PropertyChanged(this, new PropertyChangedEventArgs("BaseHueGradientBrush"));
                 PropertyChanged(this, new PropertyChangedEventArgs("BaseHueColorBrush"));
                 PropertyChanged(this, new PropertyChangedEventArgs("Hue"));
                 PropertyChanged(this, new PropertyChangedEventArgs("ColorBrush"));
@@ -62,7 +62,7 @@ namespace ColorPallete2
                 //PropertyChanged(this, new PropertyChangedEventArgs("BaseHueColorBrush"));
             }
         }
-        public LinearGradientBrush BaseHueGradient
+        public LinearGradientBrush BaseHueGradientBrush
         {
             get
             {

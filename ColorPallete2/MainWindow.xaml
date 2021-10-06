@@ -18,10 +18,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-
-        <local:CanvasSliderControl  Background="{Binding BaseHueGradient}"/>
-
-        <Rectangle x:Name="ColorDisplay" Fill="{Binding BaseHueColorBrush}" Grid.Row="1" Margin="0,8,0,0"/>
+        <Grid Background="{Binding BaseHueGradientBrush}">
+            <local:CanvasSliderControl />
+        </Grid>
+        <Rectangle x:Name="ColorDisplay" Fill="{Binding ColorBrush}" Grid.Row="1" Margin="0,8,0,0"/>
 
         <StackPanel Grid.Row="2" Margin="10">
             <Label Content="HUE" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="10" Margin="0,0,0,8"/>

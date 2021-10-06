@@ -121,12 +121,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\2D Slider\2D Slider.csproj">
-      <Project>{a87d3b89-4095-41f2-ac03-9e7c022f3738}</Project>
-      <Name>2D Slider</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Libraries\Microsoft.VisualStudio.Modeling.Sdk.15.0.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

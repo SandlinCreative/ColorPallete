@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="CanvasSlider.CanvasSlider"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CanvasSlider"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="300">
+    <Grid>
+        <Canvas x:Name="TheCanvas" PreviewMouseMove="TheCanvas_PreviewMouseMove" PreviewMouseUp="TheCanvas_PreviewMouseUp">
+            <Ellipse x:Name="DragPuck" Height="20" Width="20" PreviewMouseDown="DragPuck_PreviewMouseDown" IsManipulationEnabled="True" Canvas.Left="20" Canvas.Top="20" Fill="#02000000" Stroke="Black" StrokeThickness="3"/>
+        </Canvas>
+    </Grid>
+</UserControl>

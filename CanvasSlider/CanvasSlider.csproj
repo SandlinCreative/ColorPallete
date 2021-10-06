@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5F368810-EF65-48D1-9E52-EB57BA6F3AC8}</ProjectGuid>
+    <ProjectGuid>{BDCFDFA0-0386-4E9F-8087-D54FF917BAB1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ColorPallete2</RootNamespace>
-    <AssemblyName>ColorPallete2</AssemblyName>
+    <RootNamespace>CanvasSlider</RootNamespace>
+    <AssemblyName>CanvasSlider</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,12 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.15.0">
-      <HintPath>..\ColorPallet\Libraries\Microsoft.VisualStudio.Modeling.Sdk.15.0.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,16 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\CanvasSliderControl.xaml.cs">
-      <DependentUpon>CanvasSliderControl.xaml</DependentUpon>
-      <CustomToolNamespace>ColorPallete2</CustomToolNamespace>
-    </Compile>
-    <Compile Include="ViewModel\Base\RelayCommand.cs" />
-    <Compile Include="ViewModel\ViewModel.cs" />
-    <Page Include="Controls\CanvasSliderControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="CanvasSlider.xaml">
       <SubType>Designer</SubType>
-      <CustomToolNamespace>ColorPallete2</CustomToolNamespace>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +66,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CanvasSlider.xaml.cs">
+      <DependentUpon>CanvasSlider.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

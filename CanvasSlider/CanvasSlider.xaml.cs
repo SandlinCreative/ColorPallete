@@ -1,31 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace CanvasSliderControl
+namespace CanvasSlider
 {
     /// <summary>
-    /// Interaction logic for CanvasSliderControl.xaml
+    /// Interaction logic for CanvasSlider.xaml
     /// </summary>
-    public partial class CanvasSliderControl : UserControl
+    public partial class CanvasSlider : UserControl
     {
-        public static int PuckSize = 20;
-
-        public CanvasSliderControl()
+        public CanvasSlider()
         {
             InitializeComponent();
         }
+
+
+
+        public static int PuckSize = 20;
 
         private void Ellipse_ManipulationDelta(object sender, ManipulationDeltaEventArgs args)
         {
@@ -102,18 +93,18 @@ namespace CanvasSliderControl
             {
                 Left = PuckSize / -2;
             }
-            else if (Left > (TheCanvas.ActualWidth - PuckSize/2))
+            else if (Left > (TheCanvas.ActualWidth - PuckSize / 2))
             {
-                Left = TheCanvas.ActualWidth - PuckSize/2;
+                Left = TheCanvas.ActualWidth - PuckSize / 2;
             }
 
             if (Top < PuckSize / -2)
             {
                 Top = PuckSize / -2;
             }
-            else if (Top > (TheCanvas.ActualHeight - PuckSize/2))
+            else if (Top > (TheCanvas.ActualHeight - PuckSize / 2))
             {
-                Top = TheCanvas.ActualHeight - PuckSize/2;
+                Top = TheCanvas.ActualHeight - PuckSize / 2;
             }
 
             Canvas.SetLeft(dragObject, Left);
@@ -121,3 +112,4 @@ namespace CanvasSliderControl
         }
     }
 }
+

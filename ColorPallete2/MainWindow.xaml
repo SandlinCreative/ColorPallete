@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <Grid Background="{Binding BaseHueGradientBrush}">
-            <local:CanvasSliderControl XValue="{Binding Saturation}" YValue="{Binding Luminosity}" MaxValue="-1"/>
+            <local:CanvasSliderControl x:Name="CanvasControl" />
         </Grid>
         <Rectangle x:Name="ColorDisplay" Fill="{Binding ColorBrush}" Grid.Row="1" Margin="0,8,0,0"/>
 
@@ -52,6 +52,28 @@
             </StatusBarItem>
             <StatusBarItem>
                 <Label Content="{Binding Luminosity}"></Label>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <Label Content="X:"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Label Content="{Binding XValue}" >
+                    <Label.DataContext>
+                        <local:CanvasSliderControl/>
+                    </Label.DataContext>
+                </Label>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <Label Content="Y:"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Label Content="{Binding YValue}" >
+                    <Label.DataContext>
+                        <local:CanvasSliderControl/>
+                    </Label.DataContext>
+                </Label>
             </StatusBarItem>
         </StatusBar>
 

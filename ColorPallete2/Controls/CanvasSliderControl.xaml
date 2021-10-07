@@ -19,7 +19,7 @@
             </Canvas.Background>
         </Canvas>
         <Canvas x:Name="TheCanvas" PreviewMouseMove="TheCanvas_PreviewMouseMove" PreviewMouseUp="TheCanvas_PreviewMouseUp">
-            <Ellipse x:Name="DragPuck" Height="20" Width="20" PreviewMouseDown="DragPuck_PreviewMouseDown" IsManipulationEnabled="True" Canvas.Left="20" Canvas.Top="20" Fill="#02000000" Stroke="Black" StrokeThickness="3"/>
+            <Ellipse x:Name="DragPuck" Height="20" Width="20" PreviewMouseDown="DragPuck_PreviewMouseDown" IsManipulationEnabled="True" Canvas.Left="20" Canvas.Top="20" Fill="#02000000" Stroke="Black" StrokeThickness="3" MouseUp="DragPuck_MouseUp" PreviewMouseMove="DragPuck_PreviewMouseMove"/>
         </Canvas>
     </Grid>
 </UserControl>

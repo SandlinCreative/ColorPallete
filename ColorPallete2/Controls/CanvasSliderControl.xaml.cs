@@ -42,7 +42,7 @@ namespace ColorPallete2
         public static DependencyProperty XValueProp = DependencyProperty.Register("XValue", typeof(double), typeof(CanvasSliderControl));
         public static DependencyProperty YValueProp = DependencyProperty.Register("YValue", typeof(double), typeof(CanvasSliderControl));
         //public static DependencyProperty MaxValueProp = DependencyProperty.Register("MaxValue", typeof(int), typeof(double));
-        public static DependencyProperty PositionProp = DependencyProperty.Register("MaxValue", typeof(int), typeof(Point));
+        public static DependencyProperty PositionProp = DependencyProperty.Register("Position", typeof(int), typeof(Point));
 
 
         UIElement dragObject = null;

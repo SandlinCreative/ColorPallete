@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <Grid Background="{Binding BaseHueGradientBrush}">
-            <local:CanvasSliderControl x:Name="CanvasControl" />
+            <local:CanvasSliderControl x:Name="CanvasControl" XValue="{Binding Saturation, Mode=TwoWay}" YValue="{Binding Luminosity, Mode=TwoWay}"/>
         </Grid>
         <Rectangle x:Name="ColorDisplay" Fill="{Binding ColorBrush}" Grid.Row="1" Margin="0,8,0,0"/>
 
@@ -32,36 +32,33 @@
             <Slider x:Name="LuminositynSlider" VerticalAlignment="Center" Maximum="239" Value="{Binding Luminosity}" />
         </StackPanel>
 
-        <StatusBar FontSize="10" VerticalAlignment="Bottom" Grid.Row="3" Margin="-8" BorderThickness="0,1,0,0" BorderBrush="#FFB9B9B9">
+        <StatusBar FontSize="8" VerticalAlignment="Bottom" Grid.Row="3" Margin="-8" BorderThickness="0,1,0,0" BorderBrush="#FFB9B9B9">
             <StatusBarItem>
-                <Label Content="Hue: "/>
+                <Label Content="Hue: " Padding="5,5,0,5"/>
             </StatusBarItem>
             <StatusBarItem>
-                <Label Content="{Binding Hue}"></Label>
-            </StatusBarItem>
-            <Separator/>
-            <StatusBarItem>
-                <Label Content="Saturation: "/>
-            </StatusBarItem>
-            <StatusBarItem>
-                <Label Content="{Binding Saturation}"></Label>
+                <Label Content="{Binding Hue}" Padding="0,5,5,5"></Label>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
-                <Label Content="Brightness: "/>
+                <Label Content="Saturation: " Padding="5,5,0,5"/>
             </StatusBarItem>
             <StatusBarItem>
-                <Label Content="{Binding Luminosity}"></Label>
+                <Label Content="{Binding Saturation}" Padding="0,5,5,5"></Label>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <Label Content="Brightness: " Padding="5,5,0,5"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <Label Content="{Binding Luminosity}" Padding="0,5,5,5"></Label>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
                 <Label Content="X:"/>
             </StatusBarItem>
             <StatusBarItem>
-                <Label Content="{Binding XValue}" >
-                    <Label.DataContext>
-                        <local:CanvasSliderControl/>
-                    </Label.DataContext>
+                <Label Content="{Binding ElementName=CanvasControl, Path=XValString}" >
                 </Label>
             </StatusBarItem>
             <Separator/>
@@ -69,10 +66,7 @@
                 <Label Content="Y:"/>
             </StatusBarItem>
             <StatusBarItem>
-                <Label Content="{Binding YValue}" >
-                    <Label.DataContext>
-                        <local:CanvasSliderControl/>
-                    </Label.DataContext>
+                <Label Content="{Binding ElementName=CanvasControl, Path=YValString}" >
                 </Label>
             </StatusBarItem>
         </StatusBar>

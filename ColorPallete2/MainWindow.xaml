@@ -3,73 +3,46 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ColorPallete2"
+        xmlns:local="clr-namespace:ColorPallete2" xmlns:HSLColorPicker="clr-namespace:HSLColorPicker"
         mc:Ignorable="d"
         Title="MainWindow" Height="660" Width="350" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <local:ViewModel/>
     </Window.DataContext>
-    <Grid Margin="8">
+    <Grid Margin="8,8,8,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="577*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="{Binding BaseHueGradientBrush}">
-            <local:CanvasSliderControl x:Name="CanvasControl" XValue="{Binding Saturation, Mode=TwoWay}" YValue="{Binding Luminosity, Mode=TwoWay}"/>
-        </Grid>
-        <Rectangle x:Name="ColorDisplay" Fill="{Binding ColorBrush}" Grid.Row="1" Margin="0,8,0,0"/>
 
-        <StackPanel Grid.Row="2" Margin="10">
-            <Label Content="HUE" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="10" Margin="0,0,0,8"/>
-            <Slider x:Name="HueSlider" VerticalAlignment="Center" Maximum="240" Value="{Binding Hue}" />
-            <Label Content="SATURATION" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="10" Margin="0,10,0,8"/>
-            <Slider x:Name="SaturationSlider" VerticalAlignment="Center" Maximum="239" Value="{Binding Saturation}" />
-            <Label Content="BRIGHTNESS" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="10" Margin="0,10,0,8"/>
-            <Slider x:Name="LuminositynSlider" VerticalAlignment="Center" Maximum="239" Value="{Binding Luminosity}" />
-        </StackPanel>
+        <HSLColorPicker:HSLColorPickerControl x:Name="TheColorPicker"/>
 
-        <StatusBar FontSize="8" VerticalAlignment="Bottom" Grid.Row="3" Margin="-8" BorderThickness="0,1,0,0" BorderBrush="#FFB9B9B9">
+
+        <StatusBar Grid.Row="1" Margin="0,0.333,0.333,-0.333" Grid.ColumnSpan="2">
             <StatusBarItem>
-                <Label Content="Hue: " Padding="5,5,0,5"/>
+                <Label Content="H:" Padding="0"></Label>
             </StatusBarItem>
             <StatusBarItem>
-                <Label Content="{Binding Hue}" Padding="0,5,5,5"></Label>
-            </StatusBarItem>
-            <Separator/>
-            <StatusBarItem>
-                <Label Content="Saturation: " Padding="5,5,0,5"/>
-            </StatusBarItem>
-            <StatusBarItem>
-                <Label Content="{Binding Saturation}" Padding="0,5,5,5"></Label>
+                <Label x:Name="LabelH" Content="{Binding Hue, ElementName=TheColorPicker}" Padding="0"></Label>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
-                <Label Content="Brightness: " Padding="5,5,0,5"/>
+                <Label Content="S:" Padding="0"></Label>
             </StatusBarItem>
             <StatusBarItem>
-                <Label Content="{Binding Luminosity}" Padding="0,5,5,5"></Label>
-            </StatusBarItem>
-            <Separator/>
-            <StatusBarItem>
-                <Label Content="X:"/>
-            </StatusBarItem>
-            <StatusBarItem>
-                <Label Content="{Binding ElementName=CanvasControl, Path=XValString}" >
-                </Label>
+                <Label x:Name="LabelS" Content="{Binding ElementName=TheColorPicker, Path=Saturation}" Padding="0"></Label>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
-                <Label Content="Y:"/>
+                <Label Content="L:" Padding="0"></Label>
             </StatusBarItem>
             <StatusBarItem>
-                <Label Content="{Binding ElementName=CanvasControl, Path=YValString}" >
-                </Label>
+                <Label x:Name="LabelL" Content="{Binding ElementName=TheColorPicker, Path=Luminosity}" Padding="0"></Label>
             </StatusBarItem>
         </StatusBar>
-
     </Grid>
 </Window>

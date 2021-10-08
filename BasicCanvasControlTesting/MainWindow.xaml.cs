@@ -26,12 +26,5 @@ namespace BasicCanvasControlTesting
             InitializeComponent();
         }
 
-        private void Canvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            LabelX.Content = Mouse.GetPosition(TheCanvas).X;
-            LabelY.Content = Mouse.GetPosition(TheCanvas).Y;
-        }
-
-
     }
 }

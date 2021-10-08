@@ -59,16 +59,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\CanvasSliderControl.xaml.cs">
-      <DependentUpon>CanvasSliderControl.xaml</DependentUpon>
-      <CustomToolNamespace>ColorPallete2</CustomToolNamespace>
+    <Compile Include="Controls\HSLColorPickerControl.xaml.cs">
+      <DependentUpon>HSLColorPickerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
-    <Page Include="Controls\CanvasSliderControl.xaml">
+    <Page Include="Controls\HSLColorPickerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <CustomToolNamespace>ColorPallete2</CustomToolNamespace>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

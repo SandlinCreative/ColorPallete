@@ -42,9 +42,13 @@ namespace ColorPallete2
         {
             InitializeComponent();
             this.DataContext = this;
-            Luminosity = SliderY.Value = 240;
-            Saturation = SliderX.Value = 240;
-            Hue = SliderZ.Value = 120;
+            int startValue = 240;
+            Hue = startValue;
+            Saturation = startValue;
+            Luminosity = startValue;
+            SliderZ.Value = startValue;
+            SliderY.Value = startValue;
+            SliderX.Value = startValue;
         }
         private void TheCanvas_Loaded(object sender, EventArgs e)
         {

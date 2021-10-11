@@ -21,6 +21,17 @@
 
         <local:HSLColorPickerControl x:Name="TheColorPicker" PropertyChanged="TheColorPicker_PropertyChanged" />
 
-        <TextBox x:Name="ColorBox" Text="Color will go here" Grid.Row="1" TextAlignment="Center"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Width="50" Height="50"/>
+            <StackPanel Grid.Column="1">
+                <Label Content="RGB Hex" />
+                <TextBox x:Name="HexBox" Width="80" HorizontalAlignment="Left" />
+                
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

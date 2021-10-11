@@ -34,9 +34,7 @@ namespace ColorPallete2
 
         private void TheColorPicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            ColorBox.Text = $"{TheColorPicker.Hue.ToString("F2")}, {TheColorPicker.Saturation.ToString("F2")}, {TheColorPicker.Luminosity.ToString("F2")}";
-
-            Console.WriteLine($"{i++}: PropertyChangedEvent Fired!\nPropertyName={e.PropertyName}\nSender={sender.ToString()}");
+            HexBox.Text = $"{TheColorPicker.Hue.ToString("F2")}, {TheColorPicker.Saturation.ToString("F2")}, {TheColorPicker.Luminosity.ToString("F2")}";
         }
     }
 }

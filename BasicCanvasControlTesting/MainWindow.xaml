@@ -15,8 +15,9 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
+        
 
-        <local:HSLColorPickerControl x:Name="TheColorPicker"/>
+        <local:HSLColorPickerControl x:Name="TheColorPicker" Saturation="240" Luminosity="240"/>
 
         
         <StatusBar Grid.Row="1" Margin="0,0.333,0.333,-0.333" Grid.ColumnSpan="2">
@@ -24,14 +25,14 @@
                 <Label Content="H:" Padding="0"></Label>
             </StatusBarItem>
             <StatusBarItem>
-                <Label x:Name="LabelH" Content="{Binding ElementName=TheColorPicker, Path=Hue}" Padding="0"></Label>
+                <Label x:Name="LabelH" Content="{Binding Hue, ElementName=TheColorPicker}" Padding="0"></Label>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
                 <Label Content="S:" Padding="0"></Label>
             </StatusBarItem>
             <StatusBarItem>
-                <Label x:Name="LabelS" Content="{Binding ElementName=TheColorPicker, Path=Saturation}" Padding="0"></Label>
+                <Label x:Name="LabelS" Content="{Binding Saturation, ElementName=TheColorPicker}" Padding="0"></Label>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>

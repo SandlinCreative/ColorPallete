@@ -23,7 +23,20 @@ namespace ColorPallete2
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel();
+            //this.DataContext = new ViewModel();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private int i = 0;
+
+        private void TheColorPicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            ColorBox.Text = $"{TheColorPicker.Hue.ToString("F2")}, {TheColorPicker.Saturation.ToString("F2")}, {TheColorPicker.Luminosity.ToString("F2")}";
+
+            Console.WriteLine($"{i++}: PropertyChangedEvent Fired!\nPropertyName={e.PropertyName}\nSender={sender.ToString()}");
         }
     }
 }

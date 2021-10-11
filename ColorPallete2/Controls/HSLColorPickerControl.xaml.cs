@@ -1,61 +1,55 @@
-﻿using Microsoft.VisualStudio.Modeling.Diagrams;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.VisualStudio.Modeling.Diagrams;
 
-namespace HSLColorPicker
+namespace ColorPallete2
 {
     /// <summary>
     /// Interaction logic for HSLColorPickerControl.xaml
     /// </summary>
     public partial class HSLColorPickerControl : UserControl, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 
         #region Private Members
 
         private bool _isDown = false;
 
+        private double hue;
+        private double saturation;
+        private double luminosity;
+
         #endregion
 
         #region Public Properties
 
-        public double Hue { get; set; }
-        public double Saturation { get; set; }
-        public double Luminosity { get; set; }
+        public double Hue { get => hue; set { hue = value; PropertyChanged(this, new PropertyChangedEventArgs("Hue")); } }
+        public double Saturation { get => saturation; set { saturation = value; PropertyChanged(this, new PropertyChangedEventArgs("Saturation")); } }
+        public double Luminosity { get => luminosity; set { luminosity = value; PropertyChanged(this, new PropertyChangedEventArgs("Luminosity")); } }
 
         public static DependencyProperty HueProp = DependencyProperty.Register("Hue", typeof(double), typeof(HSLColorPickerControl));
         public static DependencyProperty SaturationProp = DependencyProperty.Register("Saturation", typeof(double), typeof(HSLColorPickerControl));
         public static DependencyProperty LuminosityProp = DependencyProperty.Register("Luminosity", typeof(double), typeof(HSLColorPickerControl));
 
         #endregion
-
         #region Constructor and Init
 
         public HSLColorPickerControl()
         {
             InitializeComponent();
-            SliderY.Value = 240;
-            SliderX.Value = 240;
-            SliderZ.Value = 0;
+            this.DataContext = this;
+            Luminosity = SliderY.Value = 240;
+            Saturation = SliderX.Value = 240;
+            Hue = SliderZ.Value = 120;
         }
         private void TheCanvas_Loaded(object sender, EventArgs e)
         {
             Canvas.SetLeft(Puck, TheCanvas.ActualWidth - 10);
             Canvas.SetTop(Puck, -10);
-
         }
 
         #endregion
@@ -76,6 +70,9 @@ namespace HSLColorPicker
                 CheckBounds();
                 SliderX.Value = ConvertToRange(Canvas.GetLeft(Puck) + 10, 0, TheCanvas.ActualWidth, 0, 240);
                 SliderY.Value = 240 - ConvertToRange(Canvas.GetTop(Puck) + 10, 0, TheCanvas.ActualHeight, 0, 240);
+
+                Saturation = SliderY.Value;
+                Luminosity = SliderX.Value;
             }
         }
         private void Puck_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -101,8 +98,6 @@ namespace HSLColorPicker
             {
                 Canvas.SetLeft(Puck, ConvertToRange(e.NewValue, 0, 240, 0, TheCanvas.ActualWidth) - 10);
                 Saturation = e.NewValue;
-
-                PropertyChanged(this, new PropertyChangedEventArgs("Saturation"));
             }
         }
         private void SliderY_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -112,8 +107,6 @@ namespace HSLColorPicker
                 var NewValue = 240 - e.NewValue;
                 Canvas.SetTop(Puck, ConvertToRange(NewValue, 0, 240, 0, TheCanvas.ActualHeight) - 10);
                 Luminosity = e.NewValue;
-
-                PropertyChanged(this, new PropertyChangedEventArgs("Luminosity"));
             }
         }
         private void SliderZ_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -140,8 +133,6 @@ namespace HSLColorPicker
             lgb.GradientStops.Add(stop2);
 
             HueGradient.Background = lgb;
-            
-            PropertyChanged(this, new PropertyChangedEventArgs("Hue"));
         }
 
         #endregion
@@ -182,5 +173,8 @@ namespace HSLColorPicker
         }
 
         #endregion
+
+
+        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
     }
 }
